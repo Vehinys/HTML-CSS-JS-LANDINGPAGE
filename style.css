@@ -55,6 +55,13 @@ header {
   top: 0;
   z-index: 1000;
   background: radial-gradient(#8bc3f5, #1294b8);
+  transition: 0.6s;
+}
+
+header.sticky {
+  background: #1294b8;
+  padding: 5px 0;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -98,9 +105,11 @@ h1 {
   padding-top: 180px; /* Increased to account for fixed header */
   padding-bottom: 50px;
   display: flex;
-  place-content: center;
-  padding-left: 200px;
-  padding-right: 200px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 #home-agency-container {
@@ -160,6 +169,8 @@ h1 {
 
 #home-image-container img {
   width: 700px;
+  max-width: 100%; /* FLUID IMAGE */
+  height: auto;
   padding-left: 30px;
 }
 
@@ -188,11 +199,11 @@ h1 {
 
 .cards {
   display: flex;
-  padding-left: 200px;
-  padding-right: 200px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 140px 20px 150px;
   text-align: center;
-  padding-top: 140px;
-  padding-bottom: 150px;
   color: white;
 }
 
@@ -282,8 +293,12 @@ h1 {
 .titles,
 #equipes {
   display: flex;
-  margin-left: 200px;
-  margin-right: 200px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 1200px;
 }
 
 .titles {
@@ -303,6 +318,8 @@ h1 {
 
 .figure-equipe img {
   width: 250px;
+  max-width: 100%;
+  height: auto;
   border-radius: 100%;
   margin-top: 50px;
   filter: grayscale(100%);
@@ -330,18 +347,23 @@ h1 {
   transition-duration: 0.5s;
   opacity: 0; /* Hidden by default */
   pointer-events: none; /* Prevent blocking mouse if hidden */
-  background: rgba(0,0,0,0.6); /* Semi-transparent background for visibility */
+  background: rgba(
+    0,
+    0,
+    0,
+    0.6
+  ); /* Semi-transparent background for visibility */
   padding: 10px 10px;
   border-radius: 20px;
 }
 
 .equipe:hover .reseaux-img {
-    opacity: 1;
-    pointer-events: auto;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .reseaux-img a {
-    color: white; /* Ensure links are white */
+  color: white; /* Ensure links are white */
 }
 
 /* .reseaux-img:hover{
@@ -423,12 +445,16 @@ h1 {
 
 .articles-blog {
   display: flex;
-  margin-right: 50px;
-  margin-left: 50px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin: 0 20px;
 }
 
 #blog img {
   width: 500px;
+  max-width: 100%; /* FLUID IMAGE */
+  height: auto;
 }
 
 #blog img:hover {
@@ -522,7 +548,7 @@ h1 {
   width: 150px;
   max-width: 100%; /* Ensure responsiveness */
   filter: contrast(20%);
-  display: block; 
+  display: block;
 }
 
 #client img:hover {
@@ -552,6 +578,8 @@ h1 {
 
 .creativity-02 img {
   width: 600px;
+  max-width: 100%; /* FLUID IMAGE */
+  height: auto;
 }
 
 .projets {
@@ -594,15 +622,16 @@ h1 {
 .our-pricing-p {
   font-size: 20px;
   color: #777;
-  padding : 20px 0 80px 0;
+  padding: 20px 0 80px 0;
   max-width: 800px;
   margin: 0 auto;
 }
 
 .cards-pricing {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 30px;
   padding-bottom: 100px;
 }
 
@@ -742,34 +771,75 @@ footer small {
   margin-top: 20px;
 }
 
-@media only screen and (max-width: 430px) {
+/* TABLETTE LANDSCAPE / SMALL LAPTOP */
+@media only screen and (max-width: 1024px) {
+  #home-content,
+  .cards,
+  .titles,
+  #equipes {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  
+  #home-agency-container h2 {
+    font-size: 50px;
+  }
+
+  .home-content-p {
+    margin: 40px;
+  }
+
+  /* Reduce gap for nav links to fit */
+  .navbar-link a {
+    margin-right: 15px;
+    font-size: 16px; 
+  }
+}
+
+/* TABLETTE PORTRAIT & MOBILE */
+/* TABLETTE PORTRAIT & MOBILE (Expanded to 991px) */
+@media only screen and (max-width: 1030px) {
   #home-socials {
     display: none;
   }
 
   body {
-    max-width: 430px;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   /* ------------------------------------------ */
 
   .navbar {
     display: flex;
-    text-align: end;
+    align-items: center;
     justify-content: flex-end;
-    margin-right: 23px;
+    margin-right: 0;
+    flex-grow: 1; /* Allow it to take space */
   }
 
   .navbar-links {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #1294b8;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
   }
 
-  .navbar-links:active {
-    display: block;
+  .navbar-links.active {
+    display: flex;
+  }
+
+  .navbar-links li {
+    margin: 15px 0;
   }
 
   .active {
-    display: block;
+    display: flex;
   }
 
   .burger {
@@ -778,11 +848,12 @@ footer small {
     background-color: transparent;
     border: none;
     border-radius: 2px;
-    position: absolute;
-    top: 5%;
-    left: 86%;
-    padding-bottom: 10px;
-    transform: translate(-50%, -50%);
+    position: relative; /* Switch to relative to sit in flex flow */
+    top: auto;
+    right: auto;
+    margin-left: 10px;
+    cursor: pointer;
+    z-index: 1001;
   }
 
   .burger span {
@@ -798,18 +869,22 @@ footer small {
   /* HEADER */
 
   header {
-    display: contents;
+    display: flex; /* Ensure header is flex for burger menu positioning if needed, or stick to default */
+    justify-content: space-between;
+    padding: 10px 20px;
   }
 
   h1 {
-    font-size: 45px;
-    padding-left: 45px;
+    font-size: 38px; /* Slightly larger for tablet/mobile crossover */
+    padding-left: 0;
+    text-align: center;
   }
 
   #home-agency-container h2 {
-    font-size: 41px;
+    font-size: 34px; /* Slightly larger for tablet/mobile crossover */
     text-align: center;
     margin: 20px 0 0 0;
+    line-height: 1.2;
   }
 
   .home-content-p {
@@ -819,11 +894,18 @@ footer small {
   }
 
   #home-content {
-    display: contents;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
   }
 
   #home-image-container img {
-    display: none;
+    display: block; /* Show image */
+    width: 80%;
+    max-width: 350px;
+    margin-top: 30px;
+    padding-left: 0;
   }
 
   #email {
@@ -837,7 +919,7 @@ footer small {
   }
 
   .subscribe-container {
-    margin: 0px 0px 30px 75px;
+    margin: 0 auto 30px auto;
   }
 
   .submit {
@@ -862,7 +944,7 @@ footer small {
 
   #features h3 {
     text-align: center;
-    font-size: 30px;
+    font-size: 24px;
   }
 
   #feature-p {
@@ -871,13 +953,19 @@ footer small {
   }
 
   .cards {
-    display: contents;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 30px;
   }
 
   .card {
     padding-top: 10px;
-    margin: 0px 50px 0px 70px;
-    padding: 10px 10px 10px 10px;
+    margin: 0; /* REMOVE MARGINS to allow flex gap to handle spacing */
+    width: 100%;
+    max-width: 320px;
+    padding: 20px;
     background: radial-gradient(#8bc3f5, #1294b8);
     border-radius: 10px;
     box-shadow: 5px 6px 5px -2px rgba(0, 0, 0, 0.61);
@@ -891,7 +979,7 @@ footer small {
   }
 
   #card-margin {
-    margin: 25px 50px 25px 70px;
+    margin: 0;
   }
 
   .card i {
@@ -932,7 +1020,10 @@ footer small {
     margin: 20px 0;
   }
   .articles-blog {
-    display: contents;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
   }
 
   #blog h3 {
@@ -983,7 +1074,10 @@ footer small {
   /* EQUIPE */
   .titles,
   #equipes {
-    display: contents;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
   }
 
   .equipes {
@@ -1027,26 +1121,39 @@ footer small {
   }
 
   .reseaux-img {
-    position: sticky;
-    top: 0%;
-    left: 0%;
-    color: #333;
-    border: none;
-    border-radius: 50%;
-    margin: 0;
-    font-size: 25px;
-    transition-duration: none;
+    position: static; /* No longer overlay */
+    display: flex;
+    flex-direction: row; /* Horizontal row */
+    justify-content: center;
+    gap: 15px;
+    opacity: 1; /* Always visible */
+    background: transparent; /* No dark background */
+    pointer-events: auto;
+    margin-top: 10px;
+    padding: 0;
+    width: 100%;
+  }
+
+  .reseaux-img a {
+    color: #333; /* Dark icon color */
+    font-size: 20px;
+  }
+  
+  .reseaux-img a:hover {
+      color: #3498db; /* Blue hover */
   }
 
   /* CREATIVITY*/
   #creativity {
-    display: contents;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 20px 0;
   }
 
   .creativity-01 h3 {
-    padding: 20px 50px 20px;
-    font-size: 25px;
+    padding: 20px 0;
+    font-size: 22px;
     text-align: center;
   }
 
@@ -1090,8 +1197,10 @@ footer small {
   }
 
   .logo {
-    display: contents;
-    text-align-last: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
   }
 
   #display {
@@ -1127,7 +1236,10 @@ footer small {
   }
 
   .cards-pricing {
-    display: contents;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
   }
 
   #our-pricing h3 {
@@ -1137,9 +1249,10 @@ footer small {
 
   .card-pricing,
   .card-pricing-advanced {
-    width: 250px;
-    padding: 10px;
-    margin-left: 50px;
+    width: 100%;
+    max-width: 300px;
+    padding: 20px;
+    margin: 0;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1155,8 +1268,8 @@ footer small {
   }
 
   .card-pricing-advanced {
-    transform: translateY(15px);
-    margin: 0 0px 30px 99px;
+    transform: none; /* Rmoved translation */
+    margin: 0;
   }
 
   /* PARALLAX */
@@ -1198,9 +1311,45 @@ footer small {
     padding: 15px 0;
   }
 
+
   footer small {
     font-size: 10px;
     margin-top: 0px;
     padding: 0px 0 35px;
+  }
+}
+
+/* Galaxy S8+ & Check (Very Small Screens) */
+@media only screen and (max-width: 360px) {
+  h1 {
+    font-size: 32px;
+  }
+  #home-agency-container h2 {
+    font-size: 28px;
+  }
+  .home-content-p {
+    margin: 20px 10px;
+  }
+  .subscribe-container {
+    width: 100%;
+    margin: 0 auto 30px;
+    padding: 5px;
+  }
+  #email {
+    width: 100%;
+    padding: 8px;
+    border-radius: 25px;
+    margin-bottom: 10px;
+  }
+  .submit {
+    width: 100%;
+    margin: 0;
+    border-radius: 25px;
+  }
+  /* Force stack specifically for form if needed */
+  .subscribe-container {
+    flex-direction: column;
+    background: transparent;
+    box-shadow: none;
   }
 }
